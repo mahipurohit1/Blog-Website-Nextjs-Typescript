@@ -1,40 +1,30 @@
 import AllPosts from "@/component/Posts/AllPosts";
-const DUMMY_DATA = [
-  {
-    slug: "getting-started-with-nextjs",
-    title: "getting-started-with-nextjs",
-    image: "getting-started-nextjs.png",
-    date: "2022-05-22",
-    description: "next js is production framework for react js ",
-  },
-  {
-    slug: "getting-started-with-nextjs2",
-    title: "getting-started-with-nextjs",
-    image: "getting-started-nextjs.png",
-    date: "2022-05-22",
-    description: "next js is production framework for react js ",
-  },
-  {
-    slug: "getting-started-with-nextjs3",
-    title: "getting-started-with-nextjs",
-    image: "getting-started-nextjs.png",
-    date: "2022-05-22",
-    description: "next js is production framework for react js ",
-  },
-  {
-    slug: "getting-started-with-nextjs4",
-    title: "getting-started-with-nextjs",
-    image: "getting-started-nextjs.png",
-    date: "2022-05-22",
-    description: "next js is production framework for react js ",
-  },
-];
-const AllPost = () => {
+import { getAllPosts } from "@/libs/posts-util";
+interface propsData {
+  AllData: {
+    slug: string;
+    title: string;
+    date: string;
+    image: string;
+    description: string;
+    content?: string;
+  }[];
+}
+const AllPost: React.FC<propsData> = (props) => {
   return (
     <>
-      <AllPosts posts={DUMMY_DATA}></AllPosts>
+      <AllPosts posts={props.AllData}></AllPosts>
     </>
   );
 };
 
 export default AllPost;
+export function getStaticProps() {
+  const data = getAllPosts();
+
+  return {
+    props: {
+      AllData: data,
+    },
+  };
+}

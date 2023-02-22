@@ -1,44 +1,35 @@
 import FeaturedPost from "@/component/Home-page/FeaturedPost";
 import Hero from "@/component/Home-page/Hero";
+import { getFeaturedPosts } from "../libs/posts-util";
 
-const HomePage = () => {
-  const DUMMY_DATA = [
-    {
-      slug: "getting-started-with-nextjs",
-      title: "getting-started-with-nextjs",
-      image: "getting-started-nextjs.png",
-      date: "2022-05-22",
-      description: "next js is production framework for react js ",
-    },
-    {
-      slug: "getting-started-with-nextjs2",
-      title: "getting-started-with-nextjs",
-      image: "getting-started-nextjs.png",
-      date: "2022-05-22",
-      description: "next js is production framework for react js ",
-    },
-    {
-      slug: "getting-started-with-nextjs3",
-      title: "getting-started-with-nextjs",
-      image: "getting-started-nextjs.png",
-      date: "2022-05-22",
-      description: "next js is production framework for react js ",
-    },
-    {
-      slug: "getting-started-with-nextjs4",
-      title: "getting-started-with-nextjs",
-      image: "getting-started-nextjs.png",
-      date: "2022-05-22",
-      description: "next js is production framework for react js ",
-    },
-  ];
+interface propsData {
+  AllData: {
+    slug: string;
+    title: string;
+    date: string;
+    image: string;
+    description: string;
+    content?: string;
+  }[];
+}
+
+const HomePage: React.FC<propsData> = (props) => {
   return (
     <>
       <Hero />
-      <FeaturedPost posts={DUMMY_DATA} />
-      
+      <FeaturedPost posts={props.AllData} />
     </>
   );
 };
 
 export default HomePage;
+
+export function getStaticProps() {
+  const data = getFeaturedPosts();
+
+  return {
+    props: {
+      AllData: data,
+    },
+  };
+}
