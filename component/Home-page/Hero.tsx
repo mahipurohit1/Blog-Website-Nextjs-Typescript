@@ -14,9 +14,8 @@ const Hero = () => {
       <div>
         <h1>Hey, I'm Mahi</h1>
         <p>
-          {" "}
           I blog about web development - especially frontend frameworks like
-          Angular & React{" "}
+          Angular & React
         </p>
       </div>
     </section>
